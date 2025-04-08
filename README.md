@@ -1,33 +1,51 @@
-This repo test a gradle setup with a private package from jfrog:
+<pre lang="markdown">
+# Gradle Private Package Test
 
-It get package located at: https://endorlabs1.jfrog.io/artifactory/testpackage-nuget/com/endor/endor-utils/1.0.0/endor-utils-1.0.0.pom
+This repository tests a Gradle setup that uses a private package from JFrog Artifactory.
 
-to test it you need to set: 
+## Package Location
 
-endorctl api create -n <tenant> -r PackageManager -d '{
-    "meta": {
-        "name": "gradle properties"
-    },
-    "spec": {
-        "gradle": {
-            "property_key_name": "artifactoryUsername",
-            "property_key_value": "<username>"
-        }
+The package used is located at:
+
+```
+https://endorlabs1.jfrog.io/artifactory/testpackage-nuget/com/endor/endor-utils/1.0.0/endor-utils-1.0.0.pom
+```
+
+## Setup Instructions
+
+To test the setup, you need to configure the credentials using `endorctl`:
+
+### Set Artifactory Username
+
+```bash
+endorctl api create -n -r PackageManager -d '{
+  "meta": {
+    "name": "gradle properties"
+  },
+  "spec": {
+    "gradle": {
+      "property_key_name": "artifactoryUsername",
+      "property_key_value": ""
     }
+  }
 }'
+```
 
-also:
+### Set Artifactory Password
 
-endorctl api create -n <tenant> -r PackageManager -d '{
-    "meta": {
-        "name": "gradle properties"
-    },
-    "spec": {
-        "gradle": {
-            "property_key_name": "artifactoryPassword",
-            "property_key_value": "<password>"
-        }
+```bash
+endorctl api create -n -r PackageManager -d '{
+  "meta": {
+    "name": "gradle properties"
+  },
+  "spec": {
+    "gradle": {
+      "property_key_name": "artifactoryPassword",
+      "property_key_value": ""
     }
+  }
 }'
+```
 
-
+> ⚠️ Be sure to replace the empty `property_key_value` fields with your actual Artifactory credentials.
+</pre>
